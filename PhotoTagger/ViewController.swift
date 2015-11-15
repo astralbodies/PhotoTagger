@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
     @IBOutlet var takePictureButton: UIButton!
@@ -45,7 +46,39 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
         if let image = info[UIImagePickerControllerOriginalImage] {
             imageView.image = image as? UIImage
             takePictureButton.hidden = true
+            self.progressView.progress = 0.0
+            self.progressView.hidden = false
             
+            let imageData = UIImageJPEGRepresentation(image as! UIImage, 0.5)!
+            
+            Alamofire.upload(
+                .POST,
+                "http://api.imagga.com/v1/content",
+                headers: [
+                    "Authorization" : "Basic YWNjXzc3MmY3ZjhjNzc0MzcxZjphNGMxYWMyMDQwNWE5MDZjZmEwMWRjMmYzMDhjOWNlYw==",
+                ],
+                multipartFormData: { multipartFormData in
+                    multipartFormData.appendBodyPart(data: imageData, name: "imagefile", fileName: "image.jpg", mimeType: "image/jpeg")
+                },
+                encodingCompletion: { encodingResult in
+                    switch encodingResult {
+                    case .Success(let upload, _, _):
+                        upload.progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
+                            print(totalBytesWritten)
+                            
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                let percent = (Float(totalBytesWritten) / Float(totalBytesExpectedToWrite))
+                                self.progressView.setProgress(percent, animated: true)
+                            })
+                        }
+                        upload.responseJSON { response in
+                            print(response)
+                        }
+                    case .Failure(let encodingError):
+                        print(encodingError)
+                    }
+                }
+            )
             
             
             dismissViewControllerAnimated(true, completion: nil)
