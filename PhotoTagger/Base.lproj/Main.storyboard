@@ -34,10 +34,16 @@
                                 <rect key="frame" x="20" y="498" width="560" height="2"/>
                                 <animations/>
                             </progressView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="NeE-gc-BWr">
+                                <rect key="frame" x="282" y="399" width="37" height="37"/>
+                                <animations/>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="NeE-gc-BWr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0Np-W2-7G7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1eT-AI-PMh" secondAttribute="trailing" constant="-20" id="0gX-KZ-VI6"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1eT-AI-PMh" secondAttribute="bottom" id="2P0-CF-Iut"/>
                             <constraint firstItem="1eT-AI-PMh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="6mG-FU-PkN"/>
@@ -45,12 +51,14 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PUb-0z-pvg" secondAttribute="bottom" constant="100" id="Hlz-jA-J7c"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PUb-0z-pvg" secondAttribute="trailing" id="R7n-7M-w8i"/>
                             <constraint firstItem="uYv-Jh-Iqx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gyl-b0-YoB"/>
+                            <constraint firstItem="PUb-0z-pvg" firstAttribute="top" secondItem="NeE-gc-BWr" secondAttribute="bottom" constant="62" id="qOu-0w-Vx3"/>
                             <constraint firstItem="uYv-Jh-Iqx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sE2-sR-NOR"/>
                             <constraint firstItem="1eT-AI-PMh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="sTZ-Dh-P3R"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photo Tagger" id="LD1-n9-pNQ"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="NeE-gc-BWr" id="2k1-dB-zOf"/>
                         <outlet property="imageView" destination="1eT-AI-PMh" id="W0k-cf-TWi"/>
                         <outlet property="progressView" destination="PUb-0z-pvg" id="mLf-qA-DcA"/>
                         <outlet property="takePictureButton" destination="uYv-Jh-Iqx" id="dG3-4z-sPm"/>
@@ -73,15 +81,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bbq-OG-Jcd">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bbq-OG-Jcd">
                                 <rect key="frame" x="20" y="72" width="560" height="29"/>
                                 <animations/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Tags"/>
+                                    <segment title="Colors"/>
                                 </segments>
                             </segmentedControl>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VkU-2g-Wb1">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VkU-2g-Wb1">
                                 <rect key="frame" x="20" y="108" width="560" height="472"/>
                                 <animations/>
                                 <connections>
@@ -91,6 +99,15 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Bbq-OG-Jcd" firstAttribute="leading" secondItem="IHI-B8-3NC" secondAttribute="leadingMargin" id="AZF-uZ-WOy"/>
+                            <constraint firstItem="VkU-2g-Wb1" firstAttribute="trailing" secondItem="IHI-B8-3NC" secondAttribute="trailingMargin" id="Bho-hK-qU0"/>
+                            <constraint firstItem="Xg4-Mk-usj" firstAttribute="top" secondItem="VkU-2g-Wb1" secondAttribute="bottom" constant="20" id="Mnz-zh-89f"/>
+                            <constraint firstItem="VkU-2g-Wb1" firstAttribute="leading" secondItem="IHI-B8-3NC" secondAttribute="leadingMargin" id="V8m-0Y-dQS"/>
+                            <constraint firstItem="Bbq-OG-Jcd" firstAttribute="trailing" secondItem="IHI-B8-3NC" secondAttribute="trailingMargin" id="YRH-vY-Hwz"/>
+                            <constraint firstItem="Bbq-OG-Jcd" firstAttribute="top" secondItem="LHE-yS-HTN" secondAttribute="bottom" constant="8" id="as9-nZ-UoB"/>
+                            <constraint firstItem="VkU-2g-Wb1" firstAttribute="top" secondItem="Bbq-OG-Jcd" secondAttribute="bottom" constant="8" id="saA-gj-cog"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aEE-BC-MZY" userLabel="First Responder" sceneMemberID="firstResponder"/>

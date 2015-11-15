@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		932ED1F71BF9390D0072C1C4 /* PhotoColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932ED1F61BF9390D0072C1C4 /* PhotoColor.swift */; };
+		932ED1F91BF944590072C1C4 /* TagsColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932ED1F81BF944590072C1C4 /* TagsColorsViewController.swift */; };
 		93EF0CA41BF41DA20051B5B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF0CA31BF41DA20051B5B1 /* AppDelegate.swift */; };
 		93EF0CA61BF41DA20051B5B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF0CA51BF41DA20051B5B1 /* ViewController.swift */; };
 		93EF0CA91BF41DA20051B5B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93EF0CA71BF41DA20051B5B1 /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* Begin PBXFileReference section */
 		74F07530F4877642CC6BF824 /* Pods-PhotoTagger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTagger.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoTagger/Pods-PhotoTagger.release.xcconfig"; sourceTree = "<group>"; };
 		8FE319B441C3706E5909F1D4 /* Pods-PhotoTagger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTagger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoTagger/Pods-PhotoTagger.debug.xcconfig"; sourceTree = "<group>"; };
+		932ED1F61BF9390D0072C1C4 /* PhotoColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoColor.swift; sourceTree = "<group>"; };
+		932ED1F81BF944590072C1C4 /* TagsColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsColorsViewController.swift; sourceTree = "<group>"; };
 		93EF0CA01BF41DA20051B5B1 /* PhotoTagger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTagger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93EF0CA31BF41DA20051B5B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93EF0CA51BF41DA20051B5B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,11 +74,13 @@
 			isa = PBXGroup;
 			children = (
 				93EF0CA31BF41DA20051B5B1 /* AppDelegate.swift */,
-				93EF0CA51BF41DA20051B5B1 /* ViewController.swift */,
-				93EF0CA71BF41DA20051B5B1 /* Main.storyboard */,
 				93EF0CAA1BF41DA20051B5B1 /* Assets.xcassets */,
-				93EF0CAC1BF41DA20051B5B1 /* LaunchScreen.storyboard */,
 				93EF0CAF1BF41DA20051B5B1 /* Info.plist */,
+				93EF0CAC1BF41DA20051B5B1 /* LaunchScreen.storyboard */,
+				93EF0CA71BF41DA20051B5B1 /* Main.storyboard */,
+				932ED1F61BF9390D0072C1C4 /* PhotoColor.swift */,
+				932ED1F81BF944590072C1C4 /* TagsColorsViewController.swift */,
+				93EF0CA51BF41DA20051B5B1 /* ViewController.swift */,
 			);
 			path = PhotoTagger;
 			sourceTree = "<group>";
@@ -210,6 +216,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				932ED1F71BF9390D0072C1C4 /* PhotoColor.swift in Sources */,
+				932ED1F91BF944590072C1C4 /* TagsColorsViewController.swift in Sources */,
 				93EF0CA61BF41DA20051B5B1 /* ViewController.swift in Sources */,
 				93EF0CA41BF41DA20051B5B1 /* AppDelegate.swift in Sources */,
 			);
