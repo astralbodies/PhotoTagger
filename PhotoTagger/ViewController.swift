@@ -54,6 +54,10 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        imageView.image = nil
+    }
 }
 
 extension ViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -144,6 +148,7 @@ extension ViewController {
         )
             .responseJSON { response in
                 guard response.result.isSuccess else {
+                    print("Error while fetching tags: \(response.result.error)")
                     completion([String]())
                     return
                 }
@@ -172,6 +177,7 @@ extension ViewController {
             )
             .responseJSON { response in
                 guard response.result.isSuccess else {
+                    print("Error while fetching colors: \(response.result.error)")
                     completion([PhotoColor]())
                     return
                 }

@@ -56,7 +56,9 @@
                             <constraint firstItem="1eT-AI-PMh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="sTZ-Dh-P3R"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Photo Tagger" id="LD1-n9-pNQ"/>
+                    <navigationItem key="navigationItem" title="Photo Tagger" id="LD1-n9-pNQ">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Uet-es-1kd"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorView" destination="NeE-gc-BWr" id="2k1-dB-zOf"/>
                         <outlet property="imageView" destination="1eT-AI-PMh" id="W0k-cf-TWi"/>
@@ -69,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="320" y="428"/>
         </scene>
-        <!--View Controller-->
+        <!--Results-->
         <scene sceneID="Sav-Yt-kAd">
             <objects>
-                <viewController id="Qvt-SZ-saO" sceneMemberID="viewController">
+                <viewController id="Qvt-SZ-saO" customClass="TagsColorsViewController" customModule="PhotoTagger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LHE-yS-HTN"/>
                         <viewControllerLayoutGuide type="bottom" id="Xg4-Mk-usj"/>
@@ -88,12 +90,15 @@
                                     <segment title="Tags"/>
                                     <segment title="Colors"/>
                                 </segments>
+                                <connections>
+                                    <action selector="tagsColorsSegmentedControlChanged:" destination="Qvt-SZ-saO" eventType="valueChanged" id="R93-qk-Mpf"/>
+                                </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VkU-2g-Wb1">
-                                <rect key="frame" x="20" y="108" width="560" height="472"/>
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <animations/>
                                 <connections>
-                                    <segue destination="ao7-DE-E3A" kind="embed" id="j9D-UD-QSz"/>
+                                    <segue destination="ao7-DE-E3A" kind="embed" identifier="DataTable" id="j9D-UD-QSz"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -102,34 +107,56 @@
                         <constraints>
                             <constraint firstItem="Bbq-OG-Jcd" firstAttribute="leading" secondItem="IHI-B8-3NC" secondAttribute="leadingMargin" id="AZF-uZ-WOy"/>
                             <constraint firstItem="VkU-2g-Wb1" firstAttribute="trailing" secondItem="IHI-B8-3NC" secondAttribute="trailingMargin" id="Bho-hK-qU0"/>
-                            <constraint firstItem="Xg4-Mk-usj" firstAttribute="top" secondItem="VkU-2g-Wb1" secondAttribute="bottom" constant="20" id="Mnz-zh-89f"/>
+                            <constraint firstItem="VkU-2g-Wb1" firstAttribute="leading" secondItem="IHI-B8-3NC" secondAttribute="leading" id="EvS-70-VID"/>
+                            <constraint firstAttribute="trailing" secondItem="VkU-2g-Wb1" secondAttribute="trailing" id="Jia-wj-llt"/>
+                            <constraint firstItem="Xg4-Mk-usj" firstAttribute="top" secondItem="VkU-2g-Wb1" secondAttribute="bottom" id="Mnz-zh-89f"/>
                             <constraint firstItem="VkU-2g-Wb1" firstAttribute="leading" secondItem="IHI-B8-3NC" secondAttribute="leadingMargin" id="V8m-0Y-dQS"/>
                             <constraint firstItem="Bbq-OG-Jcd" firstAttribute="trailing" secondItem="IHI-B8-3NC" secondAttribute="trailingMargin" id="YRH-vY-Hwz"/>
                             <constraint firstItem="Bbq-OG-Jcd" firstAttribute="top" secondItem="LHE-yS-HTN" secondAttribute="bottom" constant="8" id="as9-nZ-UoB"/>
                             <constraint firstItem="VkU-2g-Wb1" firstAttribute="top" secondItem="Bbq-OG-Jcd" secondAttribute="bottom" constant="8" id="saA-gj-cog"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Bho-hK-qU0"/>
+                                <exclude reference="V8m-0Y-dQS"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Results" id="TV9-c8-gNb"/>
+                    <connections>
+                        <outlet property="segmentedControl" destination="Bbq-OG-Jcd" id="ylB-iT-4Tb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aEE-BC-MZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="993" y="428"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Tags Colors Table View Controller-->
         <scene sceneID="TYg-fg-ud8">
             <objects>
-                <tableViewController id="ao7-DE-E3A" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dnn-2d-TR8">
-                        <rect key="frame" x="0.0" y="0.0" width="560" height="472"/>
+                <tableViewController id="ao7-DE-E3A" customClass="TagsColorsTableViewController" customModule="PhotoTagger" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dnn-2d-TR8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1ub-vX-UFL">
-                                <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TagOrColorCell" textLabel="zzx-aU-INB" style="IBUITableViewCellStyleDefault" id="1ub-vX-UFL">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1ub-vX-UFL" id="ce5-EE-3sD">
-                                    <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Tag Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zzx-aU-INB">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
