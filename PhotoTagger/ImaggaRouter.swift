@@ -28,6 +28,7 @@ public enum ImaggaRouter: URLRequestConvertible {
         let URLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(result.path))
         URLRequest.HTTPMethod = result.method.rawValue
         URLRequest.setValue("Basic \(ImaggaRouter.authenticationToken)", forHTTPHeaderField: "Authorization")
+        URLRequest.timeoutInterval = NSTimeInterval(10 * 1000)
 
         let encoding = Alamofire.ParameterEncoding.URL
         

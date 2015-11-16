@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  PhotoTagger
-//
-//  Created by Aaron Douglas on 11/11/15.
-//  Copyright © 2015 Razeware LLC. All rights reserved.
-//
-
 import UIKit
 import Alamofire
 
@@ -109,6 +101,7 @@ extension ViewController {
                             progress(percent: percent)
                         })
                     }
+                    upload.validate()
                     upload.responseJSON { response in
                         if response.result.isSuccess {
                             let responseJSON = response.result.value
@@ -116,7 +109,7 @@ extension ViewController {
                             let firstFile = uploadedFiles.firstObject!
                             let firstFileID = firstFile.valueForKey("id")! as! String
                             
-                            print(firstFileID)
+                            print("Content uploaded with ID: \(firstFileID)")
                             
                             self.downloadTags(firstFileID) { tags in
                                 
@@ -124,6 +117,9 @@ extension ViewController {
                                     completion(tags: tags, colors: colors)
                                 }
                             }
+                        } else {
+                            print("Error while uploading file: \(response.result.error)")
+                            completion(tags: [String](), colors: [PhotoColor]())
                         }
                     }
                 case .Failure(let encodingError):
@@ -144,15 +140,15 @@ extension ViewController {
                 }
                 
                 let responseJSON = response.result.value
-                let results = responseJSON?.valueForKey("results") as! NSArray
-                let tagsAndConfidences = results.firstObject!.valueForKey("tags") as! Array<NSDictionary>
+                let results = responseJSON?.valueForKey("results") as! NSArray?
+                let tagsAndConfidences = results?.firstObject?.valueForKey("tags") as! Array<NSDictionary>?
                 
-                let tags = tagsAndConfidences.map({ (let dict: NSDictionary) -> String in
+                let tags = tagsAndConfidences?.map({ (let dict: NSDictionary) -> String in
                     let tag = dict["tag"]! as! String
                     return tag
                 })
 
-                completion(tags)
+                completion(tags ?? [String]())
                 
         }
     }
@@ -168,11 +164,11 @@ extension ViewController {
                 
                 let responseJSON = response.result.value
                 let results = responseJSON?.valueForKey("results") as! NSArray
-                let firstResult = results.firstObject!
-                let info = firstResult.valueForKey("info")!
-                let imageColors = info.valueForKey("image_colors") as! Array<NSDictionary>
+                let firstResult = results.firstObject
+                let info = firstResult?.valueForKey("info")!
+                let imageColors = info?.valueForKey("image_colors") as! Array<NSDictionary>?
                 
-                let photoColors = imageColors.map({ (let values: NSDictionary) -> PhotoColor in
+                let photoColors = imageColors?.map({ (let values: NSDictionary) -> PhotoColor in
                     let r = values["r"] as! String
                     let g = values["g"] as! String
                     let b = values["b"] as! String
@@ -183,7 +179,7 @@ extension ViewController {
                     return photoColor
                 })
                 
-                completion(photoColors)
+                completion((photoColors ?? [PhotoColor]()))
         }
     }
 }
