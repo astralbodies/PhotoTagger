@@ -23,8 +23,9 @@
                                 <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYv-Jh-Iqx">
-                                <rect key="frame" x="262" y="285" width="77" height="30"/>
+                                <rect key="frame" x="246" y="280.5" width="109" height="39"/>
                                 <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Take Photo"/>
                                 <connections>
                                     <action selector="takePicture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qgx-DW-2wL"/>
