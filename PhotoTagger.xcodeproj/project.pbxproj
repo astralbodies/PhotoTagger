@@ -135,7 +135,6 @@
 				TargetAttributes = {
 					93EF0C9F1BF41DA20051B5B1 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 3XD6XAAG4G;
 					};
 				};
 			};
@@ -345,7 +344,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PhotoTagger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.networkzllc.PhotoTagger;
+				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.PhotoTagger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -358,7 +357,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PhotoTagger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.networkzllc.PhotoTagger;
+				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.PhotoTagger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
