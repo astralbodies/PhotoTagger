@@ -10,6 +10,7 @@
 		932ED1F71BF9390D0072C1C4 /* PhotoColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932ED1F61BF9390D0072C1C4 /* PhotoColor.swift */; };
 		932ED1F91BF944590072C1C4 /* TagsColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932ED1F81BF944590072C1C4 /* TagsColorsViewController.swift */; };
 		932ED1FB1BF9459E0072C1C4 /* TagsColorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932ED1FA1BF9459E0072C1C4 /* TagsColorsTableViewController.swift */; };
+		93C85B7B1BFA28AE00B209A1 /* ImaggaRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C85B7A1BFA28AE00B209A1 /* ImaggaRouter.swift */; };
 		93EF0CA41BF41DA20051B5B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF0CA31BF41DA20051B5B1 /* AppDelegate.swift */; };
 		93EF0CA61BF41DA20051B5B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF0CA51BF41DA20051B5B1 /* ViewController.swift */; };
 		93EF0CA91BF41DA20051B5B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93EF0CA71BF41DA20051B5B1 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		932ED1F61BF9390D0072C1C4 /* PhotoColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoColor.swift; sourceTree = "<group>"; };
 		932ED1F81BF944590072C1C4 /* TagsColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsColorsViewController.swift; sourceTree = "<group>"; };
 		932ED1FA1BF9459E0072C1C4 /* TagsColorsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsColorsTableViewController.swift; sourceTree = "<group>"; };
+		93C85B7A1BFA28AE00B209A1 /* ImaggaRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImaggaRouter.swift; sourceTree = "<group>"; };
 		93EF0CA01BF41DA20051B5B1 /* PhotoTagger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTagger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93EF0CA31BF41DA20051B5B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93EF0CA51BF41DA20051B5B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				932ED1FA1BF9459E0072C1C4 /* TagsColorsTableViewController.swift */,
 				932ED1F81BF944590072C1C4 /* TagsColorsViewController.swift */,
 				93EF0CA51BF41DA20051B5B1 /* ViewController.swift */,
+				93C85B7A1BFA28AE00B209A1 /* ImaggaRouter.swift */,
 			);
 			path = PhotoTagger;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				932ED1F91BF944590072C1C4 /* TagsColorsViewController.swift in Sources */,
 				932ED1FB1BF9459E0072C1C4 /* TagsColorsTableViewController.swift in Sources */,
 				93EF0CA61BF41DA20051B5B1 /* ViewController.swift in Sources */,
+				93C85B7B1BFA28AE00B209A1 /* ImaggaRouter.swift in Sources */,
 				93EF0CA41BF41DA20051B5B1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
