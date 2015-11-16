@@ -26,7 +26,7 @@ import Alamofire
 public enum ImaggaRouter: URLRequestConvertible {
     static let baseURLPath = "http://api.imagga.com/v1"
     //TODO: Replace xxx with your auth token found at https://imagga.com/profile/dashboard
-    static let authenticationToken = "Basic YWNjXzc3MmY3ZjhjNzc0MzcxZjphNGMxYWMyMDQwNWE5MDZjZmEwMWRjMmYzMDhjOWNlYw"
+    static let authenticationToken = "Basic xxx"
 
     case Content()
     case Tags(String)
