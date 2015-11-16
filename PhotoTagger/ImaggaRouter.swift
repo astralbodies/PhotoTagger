@@ -3,8 +3,8 @@ import Alamofire
 
 public enum ImaggaRouter: URLRequestConvertible {
     static let baseURLPath = "http://api.imagga.com/v1"
-//TODO: Replace this with your auth token
-    static let authenticationToken = ""
+    //TODO: Replace xxx with your auth token found at https://imagga.com/profile/dashboard
+    static let authenticationToken = "Basic xxx"
 
     case Content()
     case Tags(String)
@@ -13,7 +13,7 @@ public enum ImaggaRouter: URLRequestConvertible {
     public var URLRequest: NSMutableURLRequest {
         let result: (path: String, method: Alamofire.Method, parameters: [String: AnyObject]) = {
             switch self {
-            case .Content ():
+            case .Content():
                 return ("/content", .POST, [String: AnyObject]())
             case .Tags(let contentID):
                 let params = [ "content" : contentID ]
