@@ -28,45 +28,51 @@ struct TagsColorTableData {
 }
 
 class TagsColorsTableViewController: UITableViewController {
+
+  // MARK: - Properties
   var data: [TagsColorTableData]?
-  
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 1
-  }
-  
+
+  // MARK: - UITableViewDataSource
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if let data = data {
-      return data.count
+    guard let data = data else {
+      return 0
     }
-    return 0;
+    
+    return data.count
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cellData = data?[indexPath.row]
-    
+    guard let data = data else {
+      fatalError("Application error no cell data available")
+    }
+
+    let cellData = data[indexPath.row]
+
     let cell = tableView.dequeueReusableCellWithIdentifier("TagOrColorCell", forIndexPath: indexPath)
-    
-    cell.textLabel?.text = cellData?.label
-    
+    cell.textLabel?.text = cellData.label
     return cell
   }
   
+  // MARK: - UITableViewDelegate
   override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-    let cellData = data?[indexPath.row]
+    guard let data = data else {
+      fatalError("Application error no cell data available")
+    }
     
-    if let color = cellData?.color {
-      var red = CGFloat(0.0), green = CGFloat(0.0), blue = CGFloat(0.0), alpha = CGFloat(0.0)
-      color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-      let threshold = CGFloat(105)
-      let bgDelta = ((red * 0.299) + (green * 0.587) + (blue * 0.114));
-      
-      let textColor = (255 - bgDelta < threshold) ? UIColor.blackColor() : UIColor.whiteColor();
-      cell.textLabel?.textColor = textColor
-      cell.backgroundColor = color
-    } else {
+    let cellData = data[indexPath.row]
+    guard let color = cellData.color else {
       cell.textLabel?.textColor = UIColor.blackColor()
       cell.backgroundColor = UIColor.whiteColor()
+      return
     }
+
+    var red = CGFloat(0.0), green = CGFloat(0.0), blue = CGFloat(0.0), alpha = CGFloat(0.0)
+    color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+    let threshold = CGFloat(105)
+    let bgDelta = ((red * 0.299) + (green * 0.587) + (blue * 0.114));
+
+    let textColor = (255 - bgDelta < threshold) ? UIColor.blackColor() : UIColor.whiteColor();
+    cell.textLabel?.textColor = textColor
+    cell.backgroundColor = color
   }
 }
-
