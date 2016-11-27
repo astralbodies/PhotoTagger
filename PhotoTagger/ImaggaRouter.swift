@@ -29,33 +29,33 @@ public enum ImaggaRouter: URLRequestConvertible {
   //TODO: Replace xxx with your auth token found at https://imagga.com/profile/dashboard
   static let authenticationToken = "Basic xxx"
   
-  case Content
-  case Tags(String)
-  case Colors(String)
-  
-  public var URLRequest: NSMutableURLRequest {
-    let result: (path: String, method: Alamofire.Method, parameters: [String: AnyObject]) = {
+  case content
+  case tags(String)
+  case colors(String)
+
+  public func asURLRequest() throws -> URLRequest {
+    let result: (path: String, method: Alamofire.HTTPMethod, parameters: [String: Any]) = {
       switch self {
-      case .Content:
-        return ("/content", .POST, [String: AnyObject]())
-      case .Tags(let contentID):
+      case .content:
+        return ("/content", .post, [:])
+      case .tags(let contentID):
         let params = [ "content" : contentID ]
-        return ("/tagging", .GET, params)
-      case .Colors(let contentID):
-        let params = [ "content" : contentID, "extract_object_colors" : NSNumber(int: 0) ]
-        return ("/colors", .GET, params)
+        return ("/tagging", .get, params)
+      case .colors(let contentID):
+        let params: [String: Any] = [ "content" : contentID, "extract_object_colors" : 0 ]
+        return ("/colors", .get, params)
       }
     }()
     
-    let URL = NSURL(string: ImaggaRouter.baseURLPath)!
-    let URLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(result.path))
-    URLRequest.HTTPMethod = result.method.rawValue
-    URLRequest.setValue(ImaggaRouter.authenticationToken, forHTTPHeaderField: "Authorization")
-    URLRequest.timeoutInterval = NSTimeInterval(10 * 1000)
+    let url = URL(string: ImaggaRouter.baseURLPath)!
+    var request = URLRequest(url: url.appendingPathComponent(result.path))
+    request.httpMethod = result.method.rawValue.uppercased()
+    request.setValue(ImaggaRouter.authenticationToken, forHTTPHeaderField: "Authorization")
+    request.timeoutInterval = TimeInterval(10 * 1000)
     
-    let encoding = Alamofire.ParameterEncoding.URL
+    let encoding = Alamofire.URLEncoding()
     
-    return encoding.encode(URLRequest, parameters: result.parameters).0
+    return try encoding.encode(request, with: result.parameters)
   }
   
 }
