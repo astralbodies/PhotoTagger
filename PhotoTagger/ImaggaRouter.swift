@@ -33,29 +33,46 @@ public enum ImaggaRouter: URLRequestConvertible {
   case tags(String)
   case colors(String)
 
+  var method: HTTPMethod {
+    switch self {
+    case .content:
+      return .post
+    case .tags, .colors:
+      return .get
+    }
+  }
+
+  var path: String {
+    switch self {
+    case .content:
+      return "/content"
+    case .tags:
+      return "/tagging"
+    case .colors:
+      return "/colors"
+    }
+  }
+
   public func asURLRequest() throws -> URLRequest {
-    let result: (path: String, method: Alamofire.HTTPMethod, parameters: [String: Any]) = {
+    let parameters: [String: Any] = {
       switch self {
-      case .content:
-        return ("/content", .post, [:])
       case .tags(let contentID):
-        let params = [ "content" : contentID ]
-        return ("/tagging", .get, params)
+        return [ "content" : contentID ]
       case .colors(let contentID):
-        let params: [String: Any] = [ "content" : contentID, "extract_object_colors" : 0 ]
-        return ("/colors", .get, params)
+        return [ "content" : contentID, "extract_object_colors" : 0 ]
+      default:
+        return [:]
       }
     }()
     
-    let url = URL(string: ImaggaRouter.baseURLPath)!
-    var request = URLRequest(url: url.appendingPathComponent(result.path))
-    request.httpMethod = result.method.rawValue.uppercased()
+    let url = try ImaggaRouter.baseURLPath.asURL()
+
+    var request = URLRequest(url: url.appendingPathComponent(path))
+    request.httpMethod = method.rawValue
     request.setValue(ImaggaRouter.authenticationToken, forHTTPHeaderField: "Authorization")
     request.timeoutInterval = TimeInterval(10 * 1000)
     
-    let encoding = Alamofire.URLEncoding()
-    
-    return try encoding.encode(request, with: result.parameters)
+    return try URLEncoding.default.encode(request, with: parameters)
   }
   
 }

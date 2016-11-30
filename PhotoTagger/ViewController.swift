@@ -98,7 +98,7 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
     
     uploadImage(
       image,
-      progress: { [unowned self] percent in
+      progressCompletion: { [unowned self] percent in
         self.progressView.setProgress(percent, animated: true)
       },
       completion: { [unowned self] tags, colors in
@@ -118,31 +118,28 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
 // MARK: - Networking Functions
 extension ViewController {
 
-  func uploadImage(_ image: UIImage, progress: @escaping (_ percent: Float) -> Void, completion: @escaping (_ tags: [String], _ colors: [PhotoColor]) -> Void) {
+  func uploadImage(_ image: UIImage, progressCompletion: @escaping (_ percent: Float) -> Void, completion: @escaping (_ tags: [String], _ colors: [PhotoColor]) -> Void) {
     guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {
       print("Could not get JPEG representation of UIImage")
       return
     }
-    
+
     Alamofire.upload(
-      ImaggaRouter.content,
       multipartFormData: { multipartFormData in
-        multipartFormData.appendBodyPart(data: imageData, name: "imagefile", fileName: "image.jpg", mimeType: "image/jpeg")
+        multipartFormData.append(imageData, withName: "imagefile", fileName: "image.jpg", mimeType: "image/jpeg")
       },
+      with: ImaggaRouter.content,
       encodingCompletion: { encodingResult in
         switch encodingResult {
-        case .Success(let upload, _, _):
-          upload.progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
-            dispatch_async(dispatch_get_main_queue()) {
-              let percent = (Float(totalBytesWritten) / Float(totalBytesExpectedToWrite))
-              progress(percent: percent)
-            }
+        case .success(let upload, _, _):
+          upload.uploadProgress { progress in
+            progressCompletion(Float(progress.fractionCompleted))
           }
           upload.validate()
           upload.responseJSON { response in
             guard response.result.isSuccess else {
               print("Error while uploading file: \(response.result.error)")
-              completion(tags: [String](), colors: [PhotoColor]())
+              completion([String](), [PhotoColor]())
               return
             }
 
@@ -151,7 +148,7 @@ extension ViewController {
               let firstFile = uploadedFiles.first as? [String: AnyObject],
               let firstFileID = firstFile["id"] as? String else {
                 print("Invalid information received from service")
-                completion(tags: [String](), colors: [PhotoColor]())
+                completion([String](), [PhotoColor]())
                 return
             }
 
@@ -159,11 +156,11 @@ extension ViewController {
             
             self.downloadTags(firstFileID) { tags in
               self.downloadColors(firstFileID) { colors in
-                completion(tags: tags, colors: colors)
+                completion(tags, colors)
               }
             }
           }
-        case .Failure(let encodingError):
+        case .failure(let encodingError):
           print(encodingError)
         }
       }
