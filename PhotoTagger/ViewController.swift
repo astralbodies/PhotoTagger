@@ -96,8 +96,8 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
     progressView.isHidden = false
     activityIndicatorView.startAnimating()
     
-    uploadImage(
-      image,
+    upload(
+      image: image,
       progressCompletion: { [unowned self] percent in
         self.progressView.setProgress(percent, animated: true)
       },
@@ -118,7 +118,7 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
 // MARK: - Networking Functions
 extension ViewController {
 
-  func uploadImage(_ image: UIImage, progressCompletion: @escaping (_ percent: Float) -> Void, completion: @escaping (_ tags: [String], _ colors: [PhotoColor]) -> Void) {
+  func upload(image: UIImage, progressCompletion: @escaping (_ percent: Float) -> Void, completion: @escaping (_ tags: [String], _ colors: [PhotoColor]) -> Void) {
     guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {
       print("Could not get JPEG representation of UIImage")
       return
@@ -168,7 +168,6 @@ extension ViewController {
   }
   
   func downloadTags(_ contentID: String, completion: @escaping ([String]) -> Void) {
-
     Alamofire.request(ImaggaRouter.tags(contentID))
       .responseJSON { response in
         guard response.result.isSuccess else {
@@ -195,7 +194,6 @@ extension ViewController {
   }
   
   func downloadColors(_ contentID: String, completion: @escaping ([PhotoColor]) -> Void) {
-
     Alamofire.request(ImaggaRouter.colors(contentID))
       .responseJSON { response in
         guard response.result.isSuccess else {
