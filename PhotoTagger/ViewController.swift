@@ -154,8 +154,8 @@ extension ViewController {
 
             print("Content uploaded with ID: \(firstFileID)")
             
-            self.downloadTags(firstFileID) { tags in
-              self.downloadColors(firstFileID) { colors in
+            self.downloadTags(contentID: firstFileID) { tags in
+              self.downloadColors(contentID: firstFileID) { colors in
                 completion(tags, colors)
               }
             }
@@ -167,7 +167,7 @@ extension ViewController {
     )
   }
   
-  func downloadTags(_ contentID: String, completion: @escaping ([String]) -> Void) {
+  func downloadTags(contentID: String, completion: @escaping ([String]) -> Void) {
     Alamofire.request(ImaggaRouter.tags(contentID))
       .responseJSON { response in
         guard response.result.isSuccess else {
@@ -193,7 +193,7 @@ extension ViewController {
     }
   }
   
-  func downloadColors(_ contentID: String, completion: @escaping ([PhotoColor]) -> Void) {
+  func downloadColors(contentID: String, completion: @escaping ([PhotoColor]) -> Void) {
     Alamofire.request(ImaggaRouter.colors(contentID))
       .responseJSON { response in
         guard response.result.isSuccess else {
